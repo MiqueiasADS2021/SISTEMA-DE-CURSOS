@@ -5,7 +5,6 @@ import br.edu.cursosifpb.repository.CursoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -32,12 +31,17 @@ public class CursoController {
     @DeleteMapping("/remover/{id}")
     //Remover Curso
     public void deleteCurso(@PathVariable long id){
-        cursoRepository.deleteById(id);
+        if(cursoRepository.existsById(id)){
+            cursoRepository.deleteById(id);
+        }
+
     }
 
     @DeleteMapping("/remover")
     public void deleteCursoversao02(@RequestParam long id){
-        cursoRepository.deleteById(id);
+        if(cursoRepository.existsById(id)){
+            cursoRepository.deleteById(id);
+        }
     }
 
     @PutMapping("/editar/{id}")
