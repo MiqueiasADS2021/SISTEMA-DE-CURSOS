@@ -50,6 +50,7 @@ public class AlunoController {
     //Editar Aluno
     public void editarAluno(@PathVariable long id, @RequestBody Aluno alunoAtualizado){
         if(alunoRepository.existsById(id)){
+            alunoAtualizado.setId(id);
             alunoRepository.save(alunoAtualizado);
         }
     }
