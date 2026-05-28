@@ -37,7 +37,6 @@ public class AlunoController {
             alunoRepository.deleteById(id);
         }
     }
-
     @DeleteMapping("/remover")
     //Remover Alunos
     public void deleteAlunoversao02(@RequestParam long id){
