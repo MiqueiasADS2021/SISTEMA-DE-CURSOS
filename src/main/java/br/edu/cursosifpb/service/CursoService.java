@@ -18,7 +18,19 @@ public class CursoService {
         return cursoRepository.findAll();
     }
 
+    public List<Curso> buscarPorNome(String nome){
+        return cursoRepository.buscarPorNome(nome);
+    }
+
+    public List<Curso> buscarPorCargaHorariaMinima(int cargaHoraria){
+        return cursoRepository.buscarPorCargaHorariaMinima(cargaHoraria);
+    }
+
     public Curso cadastrarCurso(Curso curso){
+        List<Curso> cursosExistentes = cursoRepository.buscarPorNomeIntegra(curso.getNome());
+        if(!cursosExistentes.isEmpty()){
+            throw new RuntimeException("Já existe um curso com esse nome " + curso.getNome());
+        }
         return cursoRepository.save(curso);
     }
 

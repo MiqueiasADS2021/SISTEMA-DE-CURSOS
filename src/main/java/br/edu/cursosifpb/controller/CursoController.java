@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,11 +26,67 @@ public class CursoController {
         return ResponseEntity.ok(cursoService.listar());
     }
 
+    //Metodos Personalizaveis com o @Query
+    @GetMapping("/buscar/nome")
+    public ResponseEntity<?> buscarporNome(@RequestParam String nome){
+        List<Curso> cursos = cursoService.buscarPorNome(nome);
+        if(!cursos.isEmpty()){
+            return ResponseEntity.status(200).body(cursos);
+        }else{
+            return ResponseEntity.status(404).body("Curso não encontrado para a String de Busca " + nome);
+        }
+
+    }
+
+    //Metodos Personalizaveis com o @Query
+    @GetMapping("/buscar/cargahoraria")
+    public ResponseEntity<?> buscarPorCargaHorariaMinima(@RequestParam int cargaHoraria){
+        List<Curso> cursos = cursoService.buscarPorCargaHorariaMinima(cargaHoraria);
+        if(!cursos.isEmpty()){
+            return ResponseEntity.status(200).body(cursos);
+        }else{
+            return ResponseEntity.status(404).body("Curso não encontrado para a carga Horária solicitada " + cargaHoraria);
+        }
+    }
+
+
+    //Endpoint Simples
     @PostMapping("/cadastrar")
     public ResponseEntity<String> cadastrarCurso(@RequestBody Curso curso) {
-        cursoService.cadastrarCurso(curso);
-        return ResponseEntity.status(201).body("Curso cadastrado com sucesso!");
+        try{
+            cursoService.cadastrarCurso(curso);
+            return ResponseEntity.status(201).body("Curso cadastrado com sucesso!");
+        } catch (RuntimeException e){
+            return ResponseEntity.status(409).body(e.getMessage());
+        }
+
     }
+
+    //Endpoint para cadastrar varios de uma vez
+    @PostMapping("/cadastrar-lista")
+    public ResponseEntity<?> cadastrarListaCursos(@RequestBody List<Curso> cursos) {
+        // Lista para armazenar cursos que foram cadastrados com sucesso
+        List<Curso> cadastrados = new ArrayList<>();
+
+        for(Curso curso : cursos){
+            try {
+                Curso cursoRetornado = cursoService.cadastrarCurso(curso);
+                if(cursoRetornado != null){
+                    cadastrados.add(cursoRetornado);
+                }
+            } catch (RuntimeException e) {
+                return ResponseEntity.status(409).body(e.getMessage());
+            }
+        }
+
+        if(!cadastrados.isEmpty()){
+            return ResponseEntity.status(201).body(cadastrados);
+        } else {
+            return ResponseEntity.status(400).body("Nenhum curso foi cadastrado. Verifique os dados e tente novamente.");
+        }
+    }
+
+
 
     @GetMapping("/{id}")
     public ResponseEntity<?> buscarCurso(@PathVariable Long id) {
