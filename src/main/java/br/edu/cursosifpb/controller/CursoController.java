@@ -9,14 +9,12 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/cursos")
 public class CursoController {
-
-    @Autowired
-    private CursoRepository cursoRepository;
 
     @Autowired
     private CursoService cursoService;
@@ -29,6 +27,7 @@ public class CursoController {
     //Metodos Personalizaveis com o @Query
     @GetMapping("/buscar/nome")
     public ResponseEntity<?> buscarporNome(@RequestParam String nome){
+
         List<Curso> cursos = cursoService.buscarPorNome(nome);
         if(!cursos.isEmpty()){
             return ResponseEntity.status(200).body(cursos);
@@ -52,10 +51,10 @@ public class CursoController {
 
     //Endpoint Simples
     @PostMapping("/cadastrar")
-    public ResponseEntity<String> cadastrarCurso(@RequestBody Curso curso) {
+    public ResponseEntity<?> cadastrarCurso(@RequestBody Curso curso) {
         try{
             cursoService.cadastrarCurso(curso);
-            return ResponseEntity.status(201).body("Curso cadastrado com sucesso!");
+            return ResponseEntity.status(201).body("Curso Cadastrado Com Sucesso!");
         } catch (RuntimeException e){
             return ResponseEntity.status(409).body(e.getMessage());
         }

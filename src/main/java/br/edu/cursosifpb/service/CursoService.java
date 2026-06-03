@@ -27,7 +27,7 @@ public class CursoService {
     }
 
     public Curso cadastrarCurso(Curso curso){
-        List<Curso> cursosExistentes = cursoRepository.buscarPorNomeIntegra(curso.getNome());
+        List<Curso> cursosExistentes = cursoRepository.buscarPorNome(curso.getNome());
         if(!cursosExistentes.isEmpty()){
             throw new RuntimeException("Já existe um curso com esse nome " + curso.getNome());
         }
