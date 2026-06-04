@@ -23,10 +23,11 @@ public class AlunoService {
         return alunoRepository.save(aluno);
     }
 
-    public void removerAluno(Long id){
+    public Boolean removerAluno(Long id){
         if(alunoRepository.existsById(id)){
             alunoRepository.deleteById(id);
         }
+        return null;
     }
 
     public void editarAluno(Long id, Aluno alunoAtualizado){
