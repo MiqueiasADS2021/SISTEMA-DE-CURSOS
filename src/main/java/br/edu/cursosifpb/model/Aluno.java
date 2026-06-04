@@ -25,10 +25,12 @@ public class Aluno {
     @Column(nullable = false)
     private Date dataNascimento;
     @Column(nullable = false, unique = true)
-    private String email;
+    private String email_pessoal;
+    @Column(nullable = false, unique = true)
+    private String email_academico = "email@alquimia.edu.br";
     @Column(nullable = false, unique = false,length = 11)
-    private int telefone;
+    private String telefone;
     @Column(nullable = false,unique = true)
-    private int matricula = 00000;
+    private String matricula = "00000";
 
 }
