@@ -18,10 +18,16 @@ public class Aluno {
     private Long id;
     @Column(nullable = false)
     private String nome;
-    @Column(nullable = false,unique = true)
-    private String matricula;
+    @Column(nullable = false, unique = true, length = 11)
+    private String cpf;
+    @Column(nullable = false)
     private Date dataNascimento;
-
+    @Column(nullable = false, unique = true)
+    private String email;
+    @Column(nullable = false, unique = false,length = 11)
+    private int telefone;
+    @Column(nullable = false,unique = true)
+    private int matricula = 00000;
 
 
     public Aluno(Long id, String nome, String matricula, Date dataNascimento) {
