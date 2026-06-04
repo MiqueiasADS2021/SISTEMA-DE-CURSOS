@@ -1,6 +1,7 @@
 package br.edu.cursosifpb.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,6 +12,7 @@ import java.util.Date;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class Aluno {
 
     @Id
@@ -28,13 +30,5 @@ public class Aluno {
     private int telefone;
     @Column(nullable = false,unique = true)
     private int matricula = 00000;
-
-
-    public Aluno(Long id, String nome, String matricula, Date dataNascimento) {
-        this.id = id;
-        this.nome = nome;
-        this.matricula = matricula;
-        this.dataNascimento = dataNascimento;
-    }
 
 }
