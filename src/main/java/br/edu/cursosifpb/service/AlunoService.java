@@ -21,7 +21,11 @@ public class AlunoService {
     };
 
     public Aluno cadastrarAluno(AlunoDTO alunoDTO){
-        Aluno aluno = alunoDTO.getNome()]
+        Aluno aluno = new Aluno();
+        aluno.setNome(alunoDTO.getNome());
+        aluno.setCpf(alunoDTO.getCpf());
+        aluno.setTelefone(alunoDTO.getTelefone());
+        aluno.setEmail_pessoal(alunoDTO.getEmail_pessoal());
         return alunoRepository.save(aluno);
     }
 
