@@ -1,6 +1,8 @@
 package br.edu.cursosifpb.controller;
+import br.edu.cursosifpb.dto.AlunoDTO;
 import br.edu.cursosifpb.model.Aluno;
 import br.edu.cursosifpb.service.AlunoService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,15 +26,10 @@ public class AlunoController {
         return ResponseEntity.status(200).body(alunoService.listarAlunos());
     }
 
-    //Cadastra Alunos
-    @PostMapping("/cadastrar")
-    public Aluno cadastrarAluno(@RequestBody Aluno aluno){
-        return alunoService.cadastrarAluno(aluno);
-    }
 
     @PostMapping
-    public ResponseEntity<?> cadastrar(@RequestBody Aluno aluno){
-        Aluno aluno_response = alunoService.cadastrarAluno(aluno);
+    public ResponseEntity<?> cadastrar(@RequestBody @Valid AlunoDTO alunodto){
+        Aluno aluno_response = alunoService.cadastrarAluno(alunodto);
         if (aluno_response != null){
             return ResponseEntity.status(200).body(aluno_response);
         }else{

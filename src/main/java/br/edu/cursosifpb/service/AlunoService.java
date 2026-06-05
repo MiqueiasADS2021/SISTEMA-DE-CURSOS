@@ -1,4 +1,5 @@
 package br.edu.cursosifpb.service;
+import br.edu.cursosifpb.dto.AlunoDTO;
 import br.edu.cursosifpb.model.Aluno;
 import br.edu.cursosifpb.repository.AlunoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,8 @@ public class AlunoService {
         return alunoRepository.findAll();
     };
 
-    public Aluno cadastrarAluno(Aluno aluno){
+    public Aluno cadastrarAluno(AlunoDTO alunoDTO){
+        Aluno aluno = alunoDTO.getNome()]
         return alunoRepository.save(aluno);
     }
 
