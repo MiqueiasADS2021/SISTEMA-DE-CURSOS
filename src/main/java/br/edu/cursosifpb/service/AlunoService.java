@@ -17,6 +17,7 @@ public class AlunoService {
 
     //Criação dos metódos CRUD
     public List<Aluno> listarAlunos(){
+
         return alunoRepository.findAll();
     };
 
@@ -24,8 +25,10 @@ public class AlunoService {
         Aluno aluno = new Aluno();
         aluno.setNome(alunoDTO.getNome());
         aluno.setCpf(alunoDTO.getCpf());
+        aluno.setDataNascimento(aluno.getDataNascimento());
         aluno.setTelefone(alunoDTO.getTelefone());
         aluno.setEmail_pessoal(alunoDTO.getEmail_pessoal());
+        aluno.setMatricula(alunoDTO.getMatricula());
         return alunoRepository.save(aluno);
     }
 

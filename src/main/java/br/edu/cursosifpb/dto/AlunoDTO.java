@@ -17,12 +17,13 @@ public class AlunoDTO {
     @Pattern(regexp = "\\d{3}-\\d{3}-\\d{3}-\\d{2}",
             message = "Insira um CPF no formato adequado ***-***-***-**")
     private String cpf;
-    @Pattern(regexp = "[A-Z]+", message="Deve conter apenas letras maiúsculas")
-    private String codigo;
     @Past(message = "A data de nascimento deve ser no passado")
     private Date dataNascimento;
     @Email(message = "Insira um e-mail válido!")
     private String email_pessoal;
+    @Pattern(regexp = "\\(\\d{2}\\)\\d{5}-\\d{4}",
+            message = "Insira o telefone no formato adequado (83)99999-9999")
     private String telefone;
+    private String matricula;
 
 }

@@ -3,6 +3,7 @@ import br.edu.cursosifpb.dto.AlunoDTO;
 import br.edu.cursosifpb.model.Aluno;
 import br.edu.cursosifpb.service.AlunoService;
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,10 +13,11 @@ import java.util.List;
 public class AlunoController {
 
     //Injeção de dependência
+    @Autowired
     private AlunoService alunoService;
 
     //Listar os Alunos
-    @GetMapping
+    @GetMapping("/listar")
     public List<Aluno> listarAlunos(){
         return alunoService.listarAlunos();
     }
@@ -27,7 +29,7 @@ public class AlunoController {
     }
 
 
-    @PostMapping
+    @PostMapping("/cadastrar")
     public ResponseEntity<?> cadastrar(@RequestBody @Valid AlunoDTO alunodto){
         Aluno aluno_response = alunoService.cadastrarAluno(alunodto);
         if (aluno_response != null){

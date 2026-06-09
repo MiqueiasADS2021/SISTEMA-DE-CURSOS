@@ -20,17 +20,17 @@ public class Aluno {
     private Long id;
     @Column(nullable = false)
     private String nome;
-    @Column(nullable = false, unique = true, length = 11)
+    @Column(nullable = false, unique = true, length = 14)
     private String cpf;
     @Column(nullable = false)
     private Date dataNascimento;
     @Column(nullable = false, unique = true)
     private String email_pessoal;
-    @Column(nullable = false, unique = true)
-    private String email_academico = "email@alquimia.edu.br";
-    @Column(nullable = false, unique = false,length = 11)
+    @Column(nullable = false)
+    private String email_academico = "email@alquimia.edu.brr";
+    @Column(nullable = false, unique = false)
     private String telefone;
-    @Column(nullable = false,unique = true)
-    private String matricula = "00000";
+    @Column(nullable = false)
+    private String matricula;
 
 }
