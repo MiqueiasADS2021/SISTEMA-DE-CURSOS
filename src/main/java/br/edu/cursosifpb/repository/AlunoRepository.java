@@ -9,5 +9,6 @@ import java.util.List;
 @Repository
 public interface AlunoRepository extends JpaRepository<Aluno, Long> {
 
+    List<Aluno> findByCpf(String cpf);
     List<Aluno> findByNome(String nome);
 }
