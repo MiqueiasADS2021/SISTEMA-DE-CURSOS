@@ -27,7 +27,7 @@ public class Aluno {
     @Column(nullable = false, unique = true)
     private String email_pessoal;
     @Column(nullable = false)
-    private String email_academico = "email@alquimia.edu.brr";
+    private String email_academico = "eemail@alquimia.edu.brr";
     @Column(nullable = false, unique = false)
     private String telefone;
     @Column(nullable = false)

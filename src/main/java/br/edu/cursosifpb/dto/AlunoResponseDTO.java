@@ -17,4 +17,6 @@ public class AlunoResponseDTO {
     private String telefone;
     private String matricula;
 
+    public AlunoResponseDTO(String nome, String cpf, Date dataNascimento, String emailPessoal, String telefone, String matricula) {
+    }
 }

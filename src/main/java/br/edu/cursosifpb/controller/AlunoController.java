@@ -1,5 +1,6 @@
 package br.edu.cursosifpb.controller;
 import br.edu.cursosifpb.dto.AlunoDTO;
+import br.edu.cursosifpb.dto.AlunoResponseDTO;
 import br.edu.cursosifpb.model.Aluno;
 import br.edu.cursosifpb.service.AlunoService;
 import jakarta.validation.Valid;
@@ -18,20 +19,20 @@ public class AlunoController {
 
     //Listar os Alunos
     @GetMapping("/listar")
-    public List<Aluno> listarAlunos(){
+    public List<AlunoResponseDTO> listarAlunos(){
         return alunoService.listarAlunos();
     }
 
     //Versão com o ResponseEntity
     @GetMapping
-    public ResponseEntity<List<Aluno>> listar(){
+    public ResponseEntity<List<AlunoResponseDTO>> listar(){
         return ResponseEntity.status(200).body(alunoService.listarAlunos());
     }
 
 
     @PostMapping("/cadastrar")
     public ResponseEntity<?> cadastrar(@RequestBody @Valid AlunoDTO alunodto){
-        Aluno aluno_response = alunoService.cadastrarAluno(alunodto);
+        AlunoResponseDTO aluno_response = alunoService.cadastrarAluno(alunodto);
         if (aluno_response != null){
             return ResponseEntity.status(200).body(aluno_response);
         }else{

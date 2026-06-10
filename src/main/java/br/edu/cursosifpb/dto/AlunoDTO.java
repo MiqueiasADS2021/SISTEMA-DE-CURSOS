@@ -24,6 +24,5 @@ public class AlunoDTO {
     @Pattern(regexp = "\\(\\d{2}\\)\\d{5}-\\d{4}",
             message = "Insira o telefone no formato adequado (83)99999-9999")
     private String telefone;
-    private String matricula;
 
 }

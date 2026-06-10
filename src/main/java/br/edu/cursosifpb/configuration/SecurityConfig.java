@@ -18,9 +18,8 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .authorizeHttpRequests(auth ->
-                        auth.requestMatchers("/alunos/cadastrar").hasRole("ADMIN")
-                                .requestMatchers("/alunos/listar").authenticated()
+                .authorizeHttpRequests(auth -> auth
+                        .anyRequest().authenticated() //todas a rotas exigem login
                 )
                 .httpBasic(Customizer.withDefaults())
                 .csrf(csrf -> csrf.disable());
