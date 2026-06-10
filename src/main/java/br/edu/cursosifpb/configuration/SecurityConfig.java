@@ -19,6 +19,7 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/alunos/cadastrar","/cursos/cadastrar").hasRole("ADMIN")
                         .anyRequest().authenticated() //todas a rotas exigem login
                 )
                 .httpBasic(Customizer.withDefaults())
