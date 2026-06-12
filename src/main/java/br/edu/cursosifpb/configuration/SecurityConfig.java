@@ -15,15 +15,21 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfig {
 
+    private final String SECRET_KEY = "alquimiasistemas@cod-chave-secreta-jwt-2026";
+
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain filterChain(HttpSecurity http, JwtAuthFilter jwtAuthFilter) throws Exception {
         http
+                .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/alunos/cadastrar","/cursos/cadastrar").hasRole("ADMIN")
-                        .anyRequest().authenticated() //todas a rotas exigem login
+                        .requestMatchers("/alunos/**").authenticated()
+                        .requestMatchers("/cursos/**").authenticated()
+                        .requestMatchers("/auth/login").permitAll()//todas a rotas exigem login
                 )
                 .httpBasic(Customizer.withDefaults())
-                .csrf(csrf -> csrf.disable());
+                .addFilterBefore(jwtAuthFilter, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter.class);
+
                  // opcional para testes no Postman
 
         return http.build();
