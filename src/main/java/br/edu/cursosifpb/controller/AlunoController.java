@@ -3,6 +3,7 @@ import br.edu.cursosifpb.dto.AlunoDTO;
 import br.edu.cursosifpb.dto.AlunoResponseDTO;
 import br.edu.cursosifpb.model.Aluno;
 import br.edu.cursosifpb.service.AlunoService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +12,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 @RestController
 @RequestMapping("/alunos")
+@Tag(
+        name = "Alunos",
+        description = "Endpoints responsáveis pelo cadastro, listagem, edição e remoção de alunos."
+)
 public class AlunoController {
 
     //Injeção de dependência

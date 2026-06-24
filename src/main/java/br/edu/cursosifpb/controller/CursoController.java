@@ -3,6 +3,8 @@ package br.edu.cursosifpb.controller;
 import br.edu.cursosifpb.model.Curso;
 import br.edu.cursosifpb.repository.CursoRepository;
 import br.edu.cursosifpb.service.CursoService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,18 +16,30 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/cursos")
+@Tag(
+        name = "Cursos",
+        description = "Endpoints responsáveis pelo gerenciamento dos cursos disponíveis no sistema."
+)
 public class CursoController {
 
     @Autowired
     private CursoService cursoService;
 
     @GetMapping
+    @Operation(
+            summary = "Listar alunos",
+            description = "Retorna todos os alunos cadastrados no sistema."
+    )
     public ResponseEntity<List<Curso>> listarCursos() {
         return ResponseEntity.ok(cursoService.listar());
     }
 
     //Metodos Personalizaveis com o @Query
     @GetMapping("/buscar/nome")
+    @Operation(
+            summary = "Buscar por nome",
+            description = "Retorna todos os alunos cadastrados de acordo com o nome inserido."
+    )
     public ResponseEntity<?> buscarporNome(@RequestParam String nome){
 
         List<Curso> cursos = cursoService.buscarPorNome(nome);
