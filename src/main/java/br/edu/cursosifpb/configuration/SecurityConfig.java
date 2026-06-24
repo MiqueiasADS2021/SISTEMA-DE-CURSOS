@@ -23,9 +23,8 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/alunos/cadastrar","/cursos/cadastrar").hasRole("ADMIN")
-                        .requestMatchers("/alunos/**").authenticated()
-                        .requestMatchers("/cursos/**").authenticated()
-                        .requestMatchers("/auth/login").permitAll()//todas a rotas exigem login
+                        .requestMatchers("/alunos/**","/cursos/**").authenticated()
+                        .requestMatchers("/auth/login", "/swagger-ui/index.html", "/v3/api-docs","/swagger-ui/**","/webjars/**", "/v3/api-docs/**","/v3/api-docs/swagger-config").permitAll()//todas a rotas exigem login
                 )
                 .httpBasic(Customizer.withDefaults())
                 .addFilterBefore(jwtAuthFilter, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter.class);
